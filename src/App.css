@@ -1,0 +1,24 @@
+.App {
+  padding: 30px;
+  display: flex;
+}
+
+.error {
+  border: red 2px solid;
+}
+
+.error-message {
+  color: red;
+}
+
+.activeButton {
+  background-color: #a7abae;
+  border-radius: 15px;
+}
+.unActiveButton {
+  border-radius: 15px;
+}
+
+.is-done {
+  opacity: 0.5;
+}
