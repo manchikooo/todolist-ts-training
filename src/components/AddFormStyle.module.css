@@ -1,0 +1,9 @@
+.AddFormStyle {
+    display: flex;
+    align-items: stretch;
+}
+
+li {
+    display: flex;
+    align-items: center;
+}

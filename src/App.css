@@ -3,22 +3,23 @@
   display: flex;
 }
 
-.error {
-  border: red 2px solid;
+.App > div {
+  margin-right: 50px;
+}
+
+input.error {
+  border: red 1px solid;
+  background-color: red;
 }
 
 .error-message {
   color: red;
 }
 
-.activeButton {
-  background-color: #a7abae;
-  border-radius: 15px;
-}
-.unActiveButton {
-  border-radius: 15px;
+button.active-filter {
+  background-color: #90CAF9;
 }
 
 .is-done {
-  opacity: 0.5;
+  opacity: 0.9;
 }
