@@ -134,6 +134,7 @@ function App() {
                         removeTodolist={removeTodolist}
                         changeTaskName={changeTaskName}
                         changeTodolistName={changeTodolistName}
+                        // taskID={tasks[tl.id].map(t=>t.id).toString()}
                     />
                 })
             }

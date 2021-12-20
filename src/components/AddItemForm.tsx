@@ -33,6 +33,7 @@ const AddItemForm = (props: PropsType) => {
         <div className={classes.AddFormStyle}>
             {error
                 ? <TextField
+                    autoFocus
                     size='small'
                     error
                     id="filled-error-helper-text"
@@ -40,8 +41,11 @@ const AddItemForm = (props: PropsType) => {
                     defaultValue=""
                     helperText="Title is required"
                     variant="filled"
+                    onChange={onChangeHandler}
+                    onKeyPress={onKeyPressHandler}
                 />
-                : <TextField size='small'
+                : <TextField autoFocus
+                             size='small'
                              id="outlined-basic" label="TDlist name" variant="outlined"
                              value={title}
                              onChange={onChangeHandler}

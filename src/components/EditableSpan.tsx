@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 type PropsType = {
     title: string
-    changeTitle: (newItemTitle: string)=> void
+    changeTitle: (newItemTitle: string) => void
 }
 
 const EditableSpan = (props: PropsType) => {
@@ -15,16 +15,16 @@ const EditableSpan = (props: PropsType) => {
         setEditMode(false)
         props.changeTitle(title)
     }
+    const changeNewTitle = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
 
     return (
         editMode
             ? <input value={title}
                      autoFocus
                      onBlur={activateViewMode}
-                     onChange={(e) => setTitle(e.currentTarget.value)}
+                     onChange={changeNewTitle}
             />
             : <span onDoubleClick={activateEditMode}>{props.title}</span>
-
     );
 };
 
