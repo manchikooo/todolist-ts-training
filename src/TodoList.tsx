@@ -3,7 +3,8 @@ import {FilterValuesType} from './App';
 import EditableSpan from "./components/EditableSpan";
 import classes from './components/AddFormStyle.module.css'
 import DeleteIcon from '@mui/icons-material/Delete';
-import {Button, ButtonGroup, Checkbox, Grid, TextField, Typography} from "@mui/material";
+import {Button, ButtonGroup, Checkbox, Grid, IconButton, TextField, Typography} from "@mui/material";
+import AddItemForm from "./components/AddItemForm";
 
 export type TaskType = {
     id: string
@@ -23,31 +24,19 @@ type PropsType = {
     filter: FilterValuesType
     changeTaskName: (todolistID: string, taskID: string, newTitle: string) => void
     changeTodolistName: (todolistID: string, newTitle: string) => void
-    // taskID: string
 }
 
 export function Todolist(props: PropsType) {
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
 
-    const addTask = () => {
-        let newTitle = title.trim();
+    const addTask = (title1: string) => {
+        let newTitle = title1.trim();
         if (newTitle !== "") {
             props.addTask(newTitle, props.id);
             setTitle("");
         } else {
             setError("Title is required");
-        }
-    }
-
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-    }
-
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
-        if (e.charCode === 13) {
-            addTask();
         }
     }
 
@@ -61,22 +50,17 @@ export function Todolist(props: PropsType) {
     const onActiveClickHandler = () => props.changeFilter("active", props.id);
     const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
 
-
     const onChangeTitleHandler = (newItemTitle: string, itemID: string) => props.changeTaskName(props.id, itemID, newItemTitle)
-
 
     return <div>
         <h3><EditableSpan title={props.title} changeTitle={changeTodolistNameCallback}/>
-            <button onClick={removeTodolist}>x</button>
+            <IconButton >
+                <DeleteIcon onClick={removeTodolist}/>
+            </IconButton>
         </h3>
+        <AddItemForm addItem={addTask} addLabel={'Task name'}/>
         <div className={classes.AddFormStyle}>
-            <TextField size='small' value={title}
-                       onChange={onChangeHandler}
-                       onKeyPress={onKeyPressHandler}
-                       className={error ? "error" : ""}
-            />
-            <button onClick={addTask}>+</button>
-            {error && <div className="error-message">{error}</div>}
+            {/*{error && <div className="error-message">{error}</div>}*/}
         </div>
         <ul>
             {
@@ -91,9 +75,9 @@ export function Todolist(props: PropsType) {
                     return <li key={t.id} className={t.isDone ? "is-done" : ""}>
                         <Checkbox size={'small'} onChange={onChangeHandler} checked={t.isDone}/>
                         <EditableSpan title={t.title} changeTitle={(title) => onChangeTitleHandler(title, t.id)}/>
-                        <Grid>
+                        <IconButton >
                             <DeleteIcon onClick={onClickHandler}/>
-                        </Grid>
+                        </IconButton>
                         {/*<button onClick={onClickHandler}>x</button>*/}
                     </li>
                 })

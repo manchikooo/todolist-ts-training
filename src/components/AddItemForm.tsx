@@ -1,17 +1,19 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import classes from './AddFormStyle.module.css'
-import {Button, TextField} from "@mui/material";
+import {Button, Icon, TextField} from "@mui/material";
 
 type PropsType = {
     addItem: (newItemTitle: string) => void
+    addLabel: string
 }
 
 const AddItemForm = (props: PropsType) => {
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
 
-    const addTask = () => {
+    const addItem = () => {
         let newTitle = title.trim();
+        console.log(title)
         if (newTitle !== "") {
             props.addItem(title);
             setTitle("");
@@ -22,7 +24,7 @@ const AddItemForm = (props: PropsType) => {
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null);
         if (e.charCode === 13) {
-            addTask();
+            addItem();
         }
     }
 
@@ -31,29 +33,21 @@ const AddItemForm = (props: PropsType) => {
     }
     return (
         <div className={classes.AddFormStyle}>
-            {error
-                ? <TextField
-                    autoFocus
-                    size='small'
-                    error
-                    id="filled-error-helper-text"
-                    label="Error"
-                    defaultValue=""
-                    helperText="Title is required"
-                    variant="filled"
-                    onChange={onChangeHandler}
-                    onKeyPress={onKeyPressHandler}
-                />
-                : <TextField autoFocus
-                             size='small'
-                             id="outlined-basic" label="TDlist name" variant="outlined"
-                             value={title}
-                             onChange={onChangeHandler}
-                             onKeyPress={onKeyPressHandler}
-                    // sx={{background: error ? 'red' : ""}}
-                />}
-            <Button size='small' variant="contained" onClick={addTask}>Add</Button>
-            {/*{error && <div className="error-message">{error}</div>}*/}
+
+            <TextField
+                size='small'
+                id="standard-basic"
+                label={error ? "Title is required" : props.addLabel}
+                variant="standard"
+                value={title}
+                onChange={onChangeHandler}
+                onKeyPress={onKeyPressHandler}
+                error={!!error}
+            />
+            <Icon onClick={addItem}
+                  style={{marginLeft: '10px', fontSize: 30}}
+                  color="primary">add_circle
+            </Icon>
         </div>
     );
 };

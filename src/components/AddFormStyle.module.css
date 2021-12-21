@@ -1,6 +1,7 @@
 .AddFormStyle {
     display: flex;
-    align-items: stretch;
+    /*align-items: stretch;*/
+    align-items: end;
 }
 
 li {
