@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import {FilterValuesType} from './App';
 import EditableSpan from "./components/EditableSpan";
-import classes from './components/AddFormStyle.module.css'
+import classes from './components/AddItemFormStyle.module.css'
 import DeleteIcon from '@mui/icons-material/Delete';
 import {Button, ButtonGroup, Checkbox, Grid, IconButton, TextField, Typography} from "@mui/material";
 import AddItemForm from "./components/AddItemForm";

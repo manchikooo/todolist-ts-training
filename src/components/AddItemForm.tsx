@@ -1,6 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import classes from './AddFormStyle.module.css'
-import {Button, Icon, TextField} from "@mui/material";
+import classes from './AddItemFormStyle.module.css'
+import {Icon, TextField} from "@mui/material";
 
 type PropsType = {
     addItem: (newItemTitle: string) => void
@@ -13,7 +13,6 @@ const AddItemForm = (props: PropsType) => {
 
     const addItem = () => {
         let newTitle = title.trim();
-        console.log(title)
         if (newTitle !== "") {
             props.addItem(title);
             setTitle("");
