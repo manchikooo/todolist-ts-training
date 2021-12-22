@@ -2,37 +2,6 @@ import {TasksStateType} from "../App";
 import {v1} from "uuid";
 
 export const TasksReducer = (state: TasksStateType, action: ActionType): TasksStateType => {
-    // if (action.type ==='REMOVE-TASK' ) {
-    //     return {
-    //         ...state,
-    //         [action.payload.todolistID]: state[action.payload.todolistID].filter(task => task.id !== action.payload.id)
-    //     }
-    // } else if (action.type ==='ADD-TASK' ) {
-    //     return {
-    //         ...state,
-    //         [action.payload.todolistID]: [...state[action.payload.todolistID], {
-    //             id: v1(),
-    //             title: action.payload.title,
-    //             isDone: false
-    //         }]
-    //     }
-    // } else if (action.type ==='REMOVE-ALL-TASKS') {
-    //     let copyTasks = {...state}
-    //     delete copyTasks[action.payload.todolistID]
-    //     return copyTasks
-    // } else if (action.type ==='CHANGE-TASK-STATUS')  {
-    //     return {
-    //         ...state,
-    //         [action.payload.todolistID]: state[action.payload.todolistID].find(f => {
-    //             if (f && f.id === action.payload.id) {
-    //                  f.isDone = action.payload.isDone
-    //                 else return f
-    //             }
-    //         })
-    //     }
-    // }
-
-
     switch (action.type) {
         case 'REMOVE-TASK': {
             return {

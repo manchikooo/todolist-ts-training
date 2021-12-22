@@ -18,7 +18,7 @@ import {
     removeTaskAC,
     TasksReducer
 } from "./reducers/TasksReducer";
-import {addTodolistAC, removeTodolistAC, TodolistsReducer} from "./reducers/TodolistsReducer";
+import {addTodolistAC, removeTodolistAC, todolistFilterAC, TodolistsReducer} from "./reducers/TodolistsReducer";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -35,25 +35,27 @@ function App() {
     let todolistId1 = v1();
     let todolistId2 = v1();
 
-    let [todolists, todolistsDispatch] = useReducer(TodolistsReducer,[
+    let [todolists, todolistsDispatch] = useReducer(TodolistsReducer, [
         {id: todolistId1, title: "What to learn", filter: "all"},
         {id: todolistId2, title: "What to buy", filter: "all"}
     ])
 
-    let [tasks, tasksDispatch] = useReducer(TasksReducer,{
+    let [tasks, tasksDispatch] = useReducer(TasksReducer, {
         [todolistId1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
-            {id: v1(), title: "JS", isDone: true}
+            {id: v1(), title: "JS", isDone: true},
+            {id: v1(), title: "REACT", isDone: false}
         ],
         [todolistId2]: [
             {id: v1(), title: "Milk", isDone: true},
-            {id: v1(), title: "React Book", isDone: true}
+            {id: v1(), title: "React Book", isDone: true},
+            {id: v1(), title: "Native JS", isDone: false}
         ]
     });
 
     function removeTask(id: string, todolistId: string) {
         tasksDispatch(removeTaskAC(id, todolistId))
-    } // сделана
+    }                   // сделана
 
     function addTask(title: string, todolistId: string) {
         tasksDispatch(addTaskAC(title, todolistId))
@@ -64,7 +66,7 @@ function App() {
         // tasks[todolistId] = [task, ...todolistTasks];
         // // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
         // setTasks({...tasks});
-    } // сделана
+    }                   // сделана
 
     function changeStatus(id: string, isDone: boolean, todolistId: string) {
         tasksDispatch(changeTaskStatusAC(id, isDone, todolistId))
@@ -78,26 +80,27 @@ function App() {
         //     // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
         //     setTasks({...tasks});
         // }
-    }
+    }// сделана
 
     function changeFilter(value: FilterValuesType, todolistId: string) {
+        todolistsDispatch(todolistFilterAC(value, todolistId))
         // let todolist = todolists.find(tl => tl.id === todolistId);
         // if (todolist) {
         //     todolist.filter = value;
         //     setTodolists([...todolists])
         // }
-    }
+    }    // сделана
 
-    function removeTodolist(id: string) {               // сделана
+    function removeTodolist(id: string) {
         todolistsDispatch(removeTodolistAC(id))
         tasksDispatch(removeArrOfTasksAC(id))
-    }
+    }                                   // сделана
 
-    const addTodolist = (newItemTitle: string) => {  // сделана
+    const addTodolist = (newItemTitle: string) => {
         const newID = v1()
-        todolistsDispatch(addTodolistAC(newID ,newItemTitle))
-    tasksDispatch(addEmptyArrOfTasksAC(newID))
-    }
+        todolistsDispatch(addTodolistAC(newID, newItemTitle))
+        tasksDispatch(addEmptyArrOfTasksAC(newID))
+    }                         // сделана
 
     const changeTaskName = (todolistID: string, taskID: string, newTitle: string) => {
         // setTasks({
