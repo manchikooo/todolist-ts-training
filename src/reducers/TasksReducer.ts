@@ -39,6 +39,9 @@ export const TasksReducer = (state: TasksStateType, action: ActionType): TasksSt
                 } : f)
             }
         }
+        case 'CHANGE-TASK-NAME': {
+            return {...state, [action.payload.id]: state[action.payload.id].map(s=> s.id === action.payload.taskID ? {...s, title: action.payload.title} : s)}
+        }
         default:
             return state
     }
@@ -50,6 +53,7 @@ type ActionType =
     | removeArrOfTasksACType
     | changeTaskStatusACType
     | addEmptyArrOfTasksACType
+    | changeTaskNameACType
 export type removeTaskACType = ReturnType<typeof removeTaskAC>
 
 export const removeTaskAC = (id: string, todolistId: string) => {
@@ -105,6 +109,19 @@ export const changeTaskStatusAC = (id: string, isDone: boolean, todolistId: stri
             id: id,
             isDone: isDone,
             todolistID: todolistId
+        }
+    } as const
+}
+
+export type changeTaskNameACType = ReturnType<typeof changeTaskNameAC>
+
+export const changeTaskNameAC = (todolistID: string, taskID: string, newTitle: string) => {
+    return {
+        type: 'CHANGE-TASK-NAME',
+        payload: {
+            id: todolistID,
+            taskID: taskID,
+            title: newTitle
         }
     } as const
 }

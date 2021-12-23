@@ -14,16 +14,18 @@ export const TodolistsReducer = (state: Array<TodolistType>, action: ActionType)
                 todolist.filter = action.payload.value
             }
             return [...state]
-
-            //  второй вариант тернарником
+            //  ВТОРОЙ ВАРИАНТ ТЕРНАРНИКОМ (find работает быстрее)
             // return state.map(t => t.id === action.payload.id ? {...t, filter: action.payload.value} : t)
+        }
+        case 'CHANGE-TODOLIST-NAME': {
+            return state.map(s => s.id === action.payload.id ? {...s, title: action.payload.title} : s)
         }
         default:
             return state
     }
 };
 
-type ActionType = removeTodolistACType | addTodolistACType | todolistFilterACType
+type ActionType = removeTodolistACType | addTodolistACType | todolistFilterACType | changeTodolistNameACType
 
 export type removeTodolistACType = ReturnType<typeof removeTodolistAC>
 
@@ -56,6 +58,18 @@ export const todolistFilterAC = (value: FilterValuesType, todolistId: string) =>
         payload: {
             value: value,
             id: todolistId
+        }
+    } as const
+}
+
+export type changeTodolistNameACType = ReturnType<typeof changeTodolistNameAC>
+
+export const changeTodolistNameAC = (todolistID: string, newItemTitle: string) => {
+    return {
+        type: 'CHANGE-TODOLIST-NAME',
+        payload: {
+            id: todolistID,
+            title: newItemTitle
         }
     } as const
 }

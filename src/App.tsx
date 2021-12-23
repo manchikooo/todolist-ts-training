@@ -12,13 +12,19 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {Container, Grid, Paper} from "@mui/material";
 import {
     addEmptyArrOfTasksAC,
-    addTaskAC,
+    addTaskAC, changeTaskNameAC,
     changeTaskStatusAC,
     removeArrOfTasksAC,
     removeTaskAC,
     TasksReducer
 } from "./reducers/TasksReducer";
-import {addTodolistAC, removeTodolistAC, todolistFilterAC, TodolistsReducer} from "./reducers/TodolistsReducer";
+import {
+    addTodolistAC,
+    changeTodolistNameAC,
+    removeTodolistAC,
+    todolistFilterAC,
+    TodolistsReducer
+} from "./reducers/TodolistsReducer";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -103,6 +109,7 @@ function App() {
     }                         // сделана
 
     const changeTaskName = (todolistID: string, taskID: string, newTitle: string) => {
+        tasksDispatch(changeTaskNameAC(todolistID, taskID, newTitle))
         // setTasks({
         //     ...tasks,
         //     [todolistID]: tasks[todolistID].map(task => task.id === taskID ? {...task, title: newTitle} : task)
@@ -110,8 +117,9 @@ function App() {
     }
 
     const changeTodolistName = (todolistID: string, newItemTitle: string) => {
+        todolistsDispatch(changeTodolistNameAC(todolistID, newItemTitle))
         // setTodolists(todolists.map(tl => tl.id === todolistID ? {...tl, title: newItemTitle} : tl))
-    }
+    } // сделана
     console.log(tasks)
 
     return (
