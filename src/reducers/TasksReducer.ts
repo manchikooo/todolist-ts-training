@@ -54,7 +54,13 @@ type ActionType =
     | changeTaskStatusACType
     | addEmptyArrOfTasksACType
     | changeTaskNameACType
+
 export type removeTaskACType = ReturnType<typeof removeTaskAC>
+export type removeArrOfTasksACType = ReturnType<typeof removeArrOfTasksAC>
+export type addTaskACType = ReturnType<typeof addTaskAC>
+export type addEmptyArrOfTasksACType = ReturnType<typeof addEmptyArrOfTasksAC>
+export type changeTaskStatusACType = ReturnType<typeof changeTaskStatusAC>
+export type changeTaskNameACType = ReturnType<typeof changeTaskNameAC>
 
 export const removeTaskAC = (id: string, todolistId: string) => {
     return {
@@ -65,9 +71,6 @@ export const removeTaskAC = (id: string, todolistId: string) => {
         }
     } as const
 }
-
-export type removeArrOfTasksACType = ReturnType<typeof removeArrOfTasksAC>
-
 export const removeArrOfTasksAC = (todolistId: string) => {
     return {
         type: 'REMOVE-ALL-TASKS',
@@ -76,9 +79,6 @@ export const removeArrOfTasksAC = (todolistId: string) => {
         }
     } as const
 }
-
-export type addTaskACType = ReturnType<typeof addTaskAC>
-
 export const addTaskAC = (title: string, todolistId: string) => {
     return {
         type: 'ADD-TASK',
@@ -88,9 +88,6 @@ export const addTaskAC = (title: string, todolistId: string) => {
         }
     } as const
 }
-
-export type addEmptyArrOfTasksACType = ReturnType<typeof addEmptyArrOfTasksAC>
-
 export const addEmptyArrOfTasksAC = (todolistId: string) => {
     return {
         type: 'ADD-EMPTY-ARR-OF-TASKS',
@@ -99,9 +96,6 @@ export const addEmptyArrOfTasksAC = (todolistId: string) => {
         }
     } as const
 }
-
-export type changeTaskStatusACType = ReturnType<typeof changeTaskStatusAC>
-
 export const changeTaskStatusAC = (id: string, isDone: boolean, todolistId: string) => {
     return {
         type: 'CHANGE-TASK-STATUS',
@@ -112,9 +106,6 @@ export const changeTaskStatusAC = (id: string, isDone: boolean, todolistId: stri
         }
     } as const
 }
-
-export type changeTaskNameACType = ReturnType<typeof changeTaskNameAC>
-
 export const changeTaskNameAC = (todolistID: string, taskID: string, newTitle: string) => {
     return {
         type: 'CHANGE-TASK-NAME',
