@@ -59,68 +59,38 @@ function App() {
         ]
     });
 
-    function removeTask(id: string, todolistId: string) {
-        tasksDispatch(removeTaskAC(id, todolistId))
-    }                   // сделана
-
-    function addTask(title: string, todolistId: string) {
+    // TASKS
+    const addTask = (title: string, todolistId: string) => {
         tasksDispatch(addTaskAC(title, todolistId))
-        // let task = {id: v1(), title: title, isDone: false};
-        // //достанем нужный массив по todolistId:
-        // let todolistTasks = tasks[todolistId];
-        // // перезапишем в этом объекте массив для нужного тудулиста копией, добавив в начало новую таску:
-        // tasks[todolistId] = [task, ...todolistTasks];
-        // // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
-        // setTasks({...tasks});
-    }                   // сделана
-
-    function changeStatus(id: string, isDone: boolean, todolistId: string) {
-        tasksDispatch(changeTaskStatusAC(id, isDone, todolistId))
-        // //достанем нужный массив по todolistId:
-        // let todolistTasks = tasks[todolistId];
-        // // найдём нужную таску:
-        // let task = todolistTasks.find(t => t.id === id);
-        // //изменим таску, если она нашлась
-        // if (task) {
-        //     task.isDone = isDone;
-        //     // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
-        //     setTasks({...tasks});
-        // }
-    }// сделана
-
-    function changeFilter(value: FilterValuesType, todolistId: string) {
+    }
+    const removeTask = (id: string, todolistId: string) => {
+        tasksDispatch(removeTaskAC(id, todolistId))
+    };
+    const changeFilter = (value: FilterValuesType, todolistId: string) => {
         todolistsDispatch(todolistFilterAC(value, todolistId))
-        // let todolist = todolists.find(tl => tl.id === todolistId);
-        // if (todolist) {
-        //     todolist.filter = value;
-        //     setTodolists([...todolists])
-        // }
-    }    // сделана
+    };
+    const changeStatus = (id: string, isDone: boolean, todolistId: string) => {
+        tasksDispatch(changeTaskStatusAC(id, isDone, todolistId))
+    };
+    const changeTaskName = (todolistID: string, taskID: string, newTitle: string) => {
+        tasksDispatch(changeTaskNameAC(todolistID, taskID, newTitle))
+    }
+    console.log(tasks)
 
-    function removeTodolist(id: string) {
-        todolistsDispatch(removeTodolistAC(id))
-        tasksDispatch(removeArrOfTasksAC(id))
-    }                                   // сделана
-
+    // TODOLISTS
     const addTodolist = (newItemTitle: string) => {
         const newID = v1()
         todolistsDispatch(addTodolistAC(newID, newItemTitle))
         tasksDispatch(addEmptyArrOfTasksAC(newID))
-    }                         // сделана
-
-    const changeTaskName = (todolistID: string, taskID: string, newTitle: string) => {
-        tasksDispatch(changeTaskNameAC(todolistID, taskID, newTitle))
-        // setTasks({
-        //     ...tasks,
-        //     [todolistID]: tasks[todolistID].map(task => task.id === taskID ? {...task, title: newTitle} : task)
-        // })
     }
-
+    const removeTodolist = (id: string) => {
+        todolistsDispatch(removeTodolistAC(id))
+        tasksDispatch(removeArrOfTasksAC(id))
+    }
     const changeTodolistName = (todolistID: string, newItemTitle: string) => {
         todolistsDispatch(changeTodolistNameAC(todolistID, newItemTitle))
-        // setTodolists(todolists.map(tl => tl.id === todolistID ? {...tl, title: newItemTitle} : tl))
-    } // сделана
-    console.log(tasks)
+    }
+
 
     return (
         <div className="App">
