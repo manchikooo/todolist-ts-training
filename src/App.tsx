@@ -10,7 +10,6 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Container, Grid, Paper} from "@mui/material";
-import {addEmptyArrOfTasksAC} from "./reducers/TasksReducer";
 import {addTodolistAC} from "./reducers/TodolistsReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootReducerType} from "./store";
@@ -31,9 +30,9 @@ function App() {
     let dispatch = useDispatch()
     let todolists = useSelector<RootReducerType, Array<TodolistType>>(state => state.todolist)
     const addTodolist = (newItemTitle: string) => {
-        const newID = v1()
-        dispatch(addTodolistAC(newID, newItemTitle))
-        dispatch(addEmptyArrOfTasksAC(newID))
+        // const newID = v1()
+        dispatch(addTodolistAC(newItemTitle))
+        // dispatch(addEmptyArrOfTasksAC(newID))
     }
 
     return (

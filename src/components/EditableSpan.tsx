@@ -8,18 +8,20 @@ type PropsType = {
 const EditableSpan = (props: PropsType) => {
 
     const [editMode, setEditMode] = useState<boolean>(false)
-    const [title, setTitle] = useState(props.title)
+    // const [title, setTitle] = useState(props.title)
 
     const activateEditMode = () => setEditMode(true)
     const activateViewMode = () => {
         setEditMode(false)
-        props.changeTitle(title)
+        // props.changeTitle(title)
     }
-    const changeNewTitle = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
+    const changeNewTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        props.changeTitle(e.currentTarget.value)
+    }
 
     return (
         editMode
-            ? <input value={title}
+            ? <input value={props.title}
                      autoFocus
                      onBlur={activateViewMode}
                      onChange={changeNewTitle}
