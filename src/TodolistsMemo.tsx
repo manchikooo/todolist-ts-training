@@ -11,10 +11,9 @@ const TodolistsMemo = () => {
 
     return (
         <>
-            {todolists.map(tl => <Grid item>
+            {todolists.map(tl => <Grid item key={tl.id}>
                     <Paper elevation={5} style={{padding: '10px'}}>
                         <Todolist
-                            key={tl.id}
                             tl={tl}/>
                     </Paper>
                 </Grid>

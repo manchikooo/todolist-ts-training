@@ -74,8 +74,8 @@ export const Todolist: React.FC<PropsType> = ({tl}) => {
 
     return <div>
         <h3><EditableSpan title={tl.title} changeTitle={changeTodolistNameCallback}/>
-            <IconButton>
-                <DeleteIcon onClick={removeTodolist}/>
+            <IconButton onClick={removeTodolist}>
+                <DeleteIcon/>
             </IconButton>
         </h3>
         <AddItemForm addItem={addTask} addLabel={'Task name'}/>
@@ -87,11 +87,12 @@ export const Todolist: React.FC<PropsType> = ({tl}) => {
                 tasksForTodolist.map(t => {
                     return <li key={t.id} className={t.isDone ? "is-done" : ""}>
                         <Checkbox size={'small'}
-                                  onChange={()=>changeTaskStatus(t.id, !t.isDone)}
+                                  onChange={() => changeTaskStatus(t.id, !t.isDone)}
                                   checked={t.isDone}/>
                         <EditableSpan title={t.title} changeTitle={(title) => onChangeTitleHandler(title, t.id)}/>
-                        <IconButton>
-                            <DeleteIcon onClick={()=>removeTask(t.id)}/>
+
+                        <IconButton onClick={() => removeTask(t.id)}>
+                            <DeleteIcon/>
                         </IconButton>
                     </li>
                 })
