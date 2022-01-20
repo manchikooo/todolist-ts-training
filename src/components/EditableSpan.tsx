@@ -5,29 +5,29 @@ type PropsType = {
     changeTitle: (newItemTitle: string) => void
 }
 
-const EditableSpan = (props: PropsType) => {
+const EditableSpan = React.memo((props: PropsType) => {
 
     const [editMode, setEditMode] = useState<boolean>(false)
-    // const [title, setTitle] = useState(props.title)
+    const [title, setTitle] = useState(props.title)
 
     const activateEditMode = () => setEditMode(true)
     const activateViewMode = () => {
         setEditMode(false)
-        // props.changeTitle(title)
+        props.changeTitle(title)
     }
     const changeNewTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        props.changeTitle(e.currentTarget.value)
+        setTitle(e.currentTarget.value)
     }
 
     return (
         editMode
-            ? <input value={props.title}
+            ? <input value={title}
                      autoFocus
                      onBlur={activateViewMode}
                      onChange={changeNewTitle}
             />
-            : <span onDoubleClick={activateEditMode}>{props.title}</span>
+            : <span onDoubleClick={activateEditMode}>{title}</span>
     );
-};
+})
 
 export default EditableSpan;

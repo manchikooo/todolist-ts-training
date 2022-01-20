@@ -5,8 +5,6 @@ export let todolistId1 = v1();
 export let todolistId2 = v1();
 
 const initialState: Array<TodolistType> = [
-    {id: todolistId1, title: "What to learn", filter: "all"},
-    {id: todolistId2, title: "What to buy", filter: "all"}
 ]
 
 export const TodolistsReducer = (state = initialState , action: ActionType): Array<TodolistType> => {
@@ -18,13 +16,13 @@ export const TodolistsReducer = (state = initialState , action: ActionType): Arr
             return [...state, {id: action.payload.todolistId, title: action.payload.title, filter: 'all'}]
         }
         case 'FILTER-TODOLIST': {
-            let todolist = state.find(f => f.id === action.payload.todolistId)
-            if (todolist) {
-                todolist.filter = action.payload.value
-            }
-            return [...state]
+            // let todolist = state.find(f => f.id === action.payload.todolistId)
+            // if (todolist) {
+            //     todolist.filter = action.payload.value
+            // }
+            // return [...state]
             //  ВТОРОЙ ВАРИАНТ ТЕРНАРНИКОМ (find работает быстрее)
-            // return state.map(t => t.id === action.payload.id ? {...t, filter: action.payload.value} : t)
+            return state.map(t => t.id === action.payload.todolistId ? {...t, filter: action.payload.value} : t)
         }
         case 'CHANGE-TODOLIST-NAME': {
             return state.map(s => s.id === action.payload.todolistId ? {...s, title: action.payload.title} : s)

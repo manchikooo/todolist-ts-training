@@ -22,4 +22,4 @@ const TodolistsMemo = () => {
     );
 };
 
-export const TodolistMap = React.memo(TodolistsMemo)
+export const TodolistMap = TodolistsMemo

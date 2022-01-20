@@ -99,14 +99,6 @@ export const addTaskAC = (title: string, todolistId: string) => {
         }
     } as const
 }
-// export const addEmptyArrOfTasksAC = (todolistId: string) => {
-//     return {
-//         type: 'ADD-TODOLIST',
-//         payload: {
-//             id: todolistId
-//         }
-//     } as const
-// }
 export const changeTaskStatusAC = (taskID: string, isDone: boolean, todolistId: string) => {
     return {
         type: 'CHANGE-TASK-STATUS',
