@@ -1,12 +1,12 @@
 import React, {useCallback, useState} from 'react';
-import {TasksStateType, TodolistType} from './App';
+import {TodolistType} from './App';
 import EditableSpan from "./components/EditableSpan";
 import classes from './components/AddItemFormStyle.module.css'
 import DeleteIcon from '@mui/icons-material/Delete';
-import {Button, ButtonGroup, Checkbox, IconButton} from "@mui/material";
+import {Button, ButtonGroup, IconButton} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {RootReducerType} from "./store";
-import {addTaskAC, changeTaskNameAC, changeTaskStatusAC, removeTaskAC} from "./reducers/TasksReducer";
+import {addTaskAC} from "./reducers/TasksReducer";
 import {changeTodolistNameAC, removeTodolistAC, todolistFilterAC} from "./reducers/TodolistsReducer";
 import {AddItemForm} from "./components/AddItemForm";
 import {Task} from "./Task";
@@ -73,6 +73,8 @@ export const Todolist = React.memo((props: PropsType) => {
         tasksForTodolist = tasks.filter(t => t.isDone);
     }
 
+    const filterButtonsStyle = tasks.length === 0 ? classes.filterButtonsBlock : ''
+
     return <div>
         <h3><EditableSpan title={props.tl.title} changeTitle={changeTodolistNameCallback}/>
             <IconButton onClick={removeTodolist}>
@@ -91,7 +93,8 @@ export const Todolist = React.memo((props: PropsType) => {
             }
         </ul>
         <div>
-            <ButtonGroup size={'small'} color={"primary"}>
+            <ButtonGroup className={filterButtonsStyle} size={'small'}
+                         color={"primary"}>
                 <Button className={props.tl.filter === 'all' ? "active-filter" : ""}
                         onClick={onAllClickHandler}>All
                 </Button>

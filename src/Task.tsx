@@ -24,9 +24,6 @@ export const Task = React.memo(({todolistID, task}: TaskPropsType) => {
         let isDone = event.currentTarget.checked
         dispatch(changeTaskStatusAC(task.id, isDone, todolistID))
     }, [task.id, todolistID, dispatch])
-    // const changeTaskName = useCallback((taskID: string, newTitle: string) => {
-    //     dispatch(changeTaskNameAC(todolistID, taskID, newTitle))
-    // }, [todolistID, dispatch])
     const onChangeTitleHandler = useCallback((newItemTitle: string) => dispatch(changeTaskNameAC(todolistID, task.id, newItemTitle)), [dispatch, task.id, todolistID])
 
 

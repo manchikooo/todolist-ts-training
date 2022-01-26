@@ -47,8 +47,9 @@ export const AddItemForm = React.memo((props: PropsType) => {
                 error={!!error}
             />
             <Icon onClick={addItem}
-                  style={{marginLeft: '10px', fontSize: 30}}
-                  color="primary">add_circle
+                  style={{marginLeft: '10px', fontSize: 30, cursor: 'pointer'}}
+                  color="primary">
+                add_circle
             </Icon>
         </div>
     );
